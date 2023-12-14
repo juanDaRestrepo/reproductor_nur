@@ -3,13 +3,9 @@
   align-items: center;
 }
 
-#seekBarContainer {
-  margin-right: 10px;
-  flex-grow: 1;
-}
 
 #seekBar {
-  width: 60%;
+  width: 200%;
 }
 
 .btn {
