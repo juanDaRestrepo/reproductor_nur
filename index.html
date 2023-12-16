@@ -1,76 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Music Player</title>
-    <!-- Bootstrap 5 CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-    <!-- Option 1: Include in HTML -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Music Player</title>
+  <!-- Bootstrap 5 CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+    crossorigin="anonymous"
+  />
+  <!-- Option 1: Include in HTML -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
 
-  <body class="bg-light">
-    <div
-      class="container-fluid text-center fixed-bottom bg-white p-4 rounded-top shadow"
-    >
-      <div class="d-flex flex-row justify-content-evenly">
-        <div class=" d-flex justify-content-center align-items-center">
-            <img id="artwork" src="" alt="" width="50" height="50" >
-        </div>
-        <div
-          id="seekBarContainer"
-          class="mb-2 d-flex flex-column justify-content-center align-items-center"
-        >
-
+<body class="bg-light">
+  <div class="container-fluid text-center fixed-bottom bg-white p-4 rounded-top shadow">
+    <div class="d-flex flex-column flex-lg-row justify-content-lg-evenly align-items-center">
+      <div class="mb-3 mb-lg-0 d-flex justify-content-center align-items-center">
+        <img id="artwork" src="" alt="" width="50" height="50" />
+      </div>
+      <div id="seekBarContainer" class="mb-2 mb-lg-0 d-flex flex-column justify-content-center align-items-center">
         <!-- Player container -->
-          <div
-            id="customPlayer"
-            class="d-flex justify-content-center align-items-center"
-          >
-            <button id="prevBtn" class="btn me-2 rounded-circle">
-              <i class="bi bi-skip-backward-fill pb-1"></i>
-            </button>
-            <button id="playPauseBtn" class="btn me-2 rounded-circle">
-              <i id="playPauseIcon" class="bi bi-play-fill pb-1"></i>
-            </button>
-            <audio id="myPlayer" class="w-100">
-              Your browser does not support the audio tag.
-            </audio>
-            <button id="nextBtn" class="btn rounded-circle">
-              <i class="bi bi-skip-forward-fill pb-1"></i>
-            </button>
-          </div>
-          <input
-            type="range"
-            id="seekBar"
-            class="form-range"
-            value="0"
-            step="1"
-          />
+        <div id="customPlayer" class="d-flex justify-content-center align-items-center">
+          <button id="prevBtn" class="me-2 rounded-circle">
+            <i class="bi bi-skip-backward-fill pb-1"></i>
+          </button>
+          <button id="playPauseBtn" class="me-2 rounded-circle">
+            <i id="playPauseIcon" class="bi bi-play-fill pb-1"></i>
+          </button>
+          <audio id="myPlayer" class="w-100">
+            Your browser does not support the audio tag.
+          </audio>
+          <button id="nextBtn" class="rounded-circle">
+            <i class="bi bi-skip-forward-fill pb-1"></i>
+          </button>
         </div>
+        <input type="range" id="seekBar" class="form-range" value="0" step="1" />
+      </div>
 
-        <!-- Songinfo container -->
-        <div class="d-flex justify-content-center align-items-center">
-          <div id="songInfo" class="d-flex flex-column align-items-center">
-            <div id="songName" class="mb-2">Now Playing: -</div>
-            <div id="albumName" class="mb-2">Album: -</div>
-            <div id="artistName" class="mb-2">Artist: -</div>
-          </div>
+      <!-- Songinfo container -->
+      <div id="songInfo" class="mb-2 mb-lg-0 d-flex flex-column justify-content-lg-start align-items-lg-start">
+        <div class="d-flex flex-lg-row mb-2">
+          <div id="songName" class="fw-bold me-1"></div>
+          <div id="mixType">original mix</div>
         </div>
+        <div id="albumName" class="mb-2"></div>
+        <div id="artistName" class="mb-2"></div>
       </div>
     </div>
-    <!-- Bootstrap 5 JS and Popper.js (required for Bootstrap JS) -->
-
-    <script src="script.js"></script>
-  </body>
+  </div>
+  <!-- Bootstrap 5 JS and Popper.js (required for Bootstrap JS) -->
+  <script src="script.js"></script>
+</body>
 </html>

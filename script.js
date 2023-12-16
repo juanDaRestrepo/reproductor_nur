@@ -4,66 +4,86 @@ const songs = [
     name: "Divinus",
     album: "Divinus EP",
     artist: "Alfredo Mazzilli",
-    imgUrl: "https://geo-media.beatport.com/image_size/1400x1400/3de606d9-8679-4f9c-96fa-961772c1138d.jpg"
+    mixType: "Original Mix",
+    imgUrl:
+      "https://geo-media.beatport.com/image_size/1400x1400/3de606d9-8679-4f9c-96fa-961772c1138d.jpg",
   },
   {
     url: "songs/Atomic Moog - Rise & Fall - 03 Fall.wav",
     name: "Fall",
     album: "Rise & Fall",
     artist: "Atomic Moog",
-    imgUrl: "https://geo-media.beatport.com/image_size/1400x1400/d663d098-1906-44c1-8bb8-00bd55908425.jpg"
+    mixType: "Original Mix",
+    imgUrl:
+      "https://geo-media.beatport.com/image_size/1400x1400/d663d098-1906-44c1-8bb8-00bd55908425.jpg",
   },
 ];
 
-
 document.addEventListener("DOMContentLoaded", function () {
+  
   let currentIndex = 0;
   const customPlayer = document.getElementById("customPlayer");
   const player = customPlayer.querySelector("#myPlayer");
   const prevBtn = customPlayer.querySelector("#prevBtn");
   const nextBtn = customPlayer.querySelector("#nextBtn");
   const songNameDisplay = document.getElementById("songName");
+  const mixTypeDisplay = document.getElementById("mixType");
   const albumNameDisplay = document.getElementById("albumName");
   const artistNameDisplay = document.getElementById("artistName");
-  const playPauseBtn = customPlayer.querySelector("#playPauseBtn");
-  const playPauseIcon = customPlayer.querySelector("#playPauseIcon");
+  const playPauseBtn = document.querySelector("#playPauseBtn");
+  const playPauseIcon = document.querySelector("#playPauseIcon");
   const seekBar = document.querySelector("#seekBar");
   const artwork = document.querySelector("#artwork");
 
   player.src = songs[currentIndex].url;
-  songNameDisplay.textContent = `${songs[currentIndex].name}`;
-  albumNameDisplay.textContent = `${songs[currentIndex].album}`;
-  artistNameDisplay.textContent = ` ${songs[currentIndex].artist}`;
-  artwork.src = `${songs[currentIndex].imgUrl}`
+
+  changeTrackInfo(
+    songs[currentIndex].name,
+    songs[currentIndex].album,
+    songs[currentIndex].artist,
+    songs[currentIndex].imgUrl,
+    songs[currentIndex].mixType
+  );
+
+  artwork.src = `${songs[currentIndex].imgUrl}`;
 
   player.addEventListener("ended", () => {
     currentIndex = (currentIndex + 1) % songs.length;
     player.src = songs[currentIndex].url;
     player.play();
-    songNameDisplay.textContent = `${songs[currentIndex].name}`;
-    albumNameDisplay.textContent = `${songs[currentIndex].album}`;
-    artistNameDisplay.textContent = ` ${songs[currentIndex].artist}`;
-    artwork.src = `${songs[currentIndex].imgUrl}`
+    changeTrackInfo(
+      songs[currentIndex].name,
+      songs[currentIndex].album,
+      songs[currentIndex].artist,
+      songs[currentIndex].imgUrl,
+      songs[currentIndex].mixType
+    );
   });
 
   prevBtn.addEventListener("click", () => {
     currentIndex = (currentIndex - 1 + songs.length) % songs.length;
     player.src = songs[currentIndex].url;
     player.play();
-    songNameDisplay.textContent = `${songs[currentIndex].name}`;
-    albumNameDisplay.textContent = `${songs[currentIndex].album}`;
-    artistNameDisplay.textContent = ` ${songs[currentIndex].artist}`;
-artwork.src = `${songs[currentIndex].imgUrl}`
+    changeTrackInfo(
+      songs[currentIndex].name,
+      songs[currentIndex].album,
+      songs[currentIndex].artist,
+      songs[currentIndex].imgUrl,
+      songs[currentIndex].mixType
+    );
   });
 
   nextBtn.addEventListener("click", () => {
     currentIndex = (currentIndex + 1) % songs.length;
     player.src = songs[currentIndex].url;
     player.play();
-    songNameDisplay.textContent = `${songs[currentIndex].name}`;
-    albumNameDisplay.textContent = `${songs[currentIndex].album}`;
-    artistNameDisplay.textContent = ` ${songs[currentIndex].artist}`;
-artwork.src = `${songs[currentIndex].imgUrl}`
+    changeTrackInfo(
+      songs[currentIndex].name,
+      songs[currentIndex].album,
+      songs[currentIndex].artist,
+      songs[currentIndex].imgUrl,
+      songs[currentIndex].mixType
+    );
   });
 
   playPauseBtn.addEventListener("click", () => {
@@ -88,4 +108,12 @@ artwork.src = `${songs[currentIndex].imgUrl}`
     const seekTime = (seekBar.value / 100) * player.duration;
     player.currentTime = seekTime;
   });
+
+  function changeTrackInfo(name, album, artist, artwork, mixType) {
+    songNameDisplay.textContent = name;
+    albumNameDisplay.textContent = album;
+    artistNameDisplay.textContent = artist;
+    mixTypeDisplay.textContent = mixType;
+    artwork.src = artwork;
+  }
 });
