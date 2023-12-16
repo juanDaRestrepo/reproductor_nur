@@ -9,7 +9,7 @@
 }
 
 button {
-  all: initial; /* Utiliza 'all: inherit;' si prefieres heredar estilos de los elementos padre */
+  all: initial;
 }
 
 .btn {
