@@ -5,8 +5,7 @@ const songs = [
     album: "Divinus EP",
     artist: "Alfredo Mazzilli",
     mixType: "Original Mix",
-    imgUrl:
-      "https://geo-media.beatport.com/image_size/1400x1400/3de606d9-8679-4f9c-96fa-961772c1138d.jpg",
+    imgUrl: "https://geo-media.beatport.com/image_size/1400x1400/3de606d9-8679-4f9c-96fa-961772c1138d.jpg",
   },
   {
     url: "songs/Atomic Moog - Rise & Fall - 03 Fall.wav",
@@ -14,13 +13,12 @@ const songs = [
     album: "Rise & Fall",
     artist: "Atomic Moog",
     mixType: "Original Mix",
-    imgUrl:
-      "https://geo-media.beatport.com/image_size/1400x1400/d663d098-1906-44c1-8bb8-00bd55908425.jpg",
+    imgUrl: "https://geo-media.beatport.com/image_size/1400x1400/d663d098-1906-44c1-8bb8-00bd55908425.jpg",
   },
 ];
 
 document.addEventListener("DOMContentLoaded", function () {
-  
+
   let currentIndex = 0;
   const customPlayer = document.getElementById("customPlayer");
   const player = customPlayer.querySelector("#myPlayer");
@@ -37,53 +35,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
   player.src = songs[currentIndex].url;
 
-  changeTrackInfo(
-    songs[currentIndex].name,
-    songs[currentIndex].album,
-    songs[currentIndex].artist,
-    songs[currentIndex].imgUrl,
-    songs[currentIndex].mixType
-  );
+  changeTrackInfo(songs[currentIndex]);
 
-  artwork.src = `${songs[currentIndex].imgUrl}`;
+  player.addEventListener("loadedmetadata", () => {
+    // Actualiza el tiempo total del tema
+    const totalTimeElement = document.getElementById("totalTime");
+    totalTimeElement.textContent = formatTime(player.duration);
+  });
 
   player.addEventListener("ended", () => {
     currentIndex = (currentIndex + 1) % songs.length;
     player.src = songs[currentIndex].url;
     player.play();
-    changeTrackInfo(
-      songs[currentIndex].name,
-      songs[currentIndex].album,
-      songs[currentIndex].artist,
-      songs[currentIndex].imgUrl,
-      songs[currentIndex].mixType
-    );
+    changeTrackInfo(songs[currentIndex]);
   });
 
   prevBtn.addEventListener("click", () => {
     currentIndex = (currentIndex - 1 + songs.length) % songs.length;
     player.src = songs[currentIndex].url;
     player.play();
-    changeTrackInfo(
-      songs[currentIndex].name,
-      songs[currentIndex].album,
-      songs[currentIndex].artist,
-      songs[currentIndex].imgUrl,
-      songs[currentIndex].mixType
-    );
+    changeTrackInfo(songs[currentIndex]);
   });
 
   nextBtn.addEventListener("click", () => {
     currentIndex = (currentIndex + 1) % songs.length;
     player.src = songs[currentIndex].url;
     player.play();
-    changeTrackInfo(
-      songs[currentIndex].name,
-      songs[currentIndex].album,
-      songs[currentIndex].artist,
-      songs[currentIndex].imgUrl,
-      songs[currentIndex].mixType
-    );
+    changeTrackInfo(songs[currentIndex]);
   });
 
   playPauseBtn.addEventListener("click", () => {
@@ -100,8 +78,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   player.addEventListener("timeupdate", () => {
     const percent = (player.currentTime / player.duration) * 100;
-
+    const currentTimeElement = document.getElementById("currentTime");
     seekBar.value = percent;
+    currentTimeElement.textContent = formatTime(player.currentTime);
   });
 
   seekBar.addEventListener("input", () => {
@@ -109,11 +88,18 @@ document.addEventListener("DOMContentLoaded", function () {
     player.currentTime = seekTime;
   });
 
-  function changeTrackInfo(name, album, artist, artwork, mixType) {
+  function changeTrackInfo(songs) {
+    const { name, album, artist, mixType, imgUrl } = songs;
     songNameDisplay.textContent = name;
     albumNameDisplay.textContent = album;
     artistNameDisplay.textContent = artist;
     mixTypeDisplay.textContent = mixType;
-    artwork.src = artwork;
+    artwork.src = imgUrl;
+  }
+
+  function formatTime(time) {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   }
 });
